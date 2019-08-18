@@ -3,14 +3,9 @@ from django.contrib.auth.decorators import permission_required
 from .forms import LoginForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-def user_active_action(request, user):
-    if user.is_active:                        
-        login(request, user)                        
-        return HttpResponse('Authenticated successfully')
-    else:                        
-        return HttpResponse('Disabled account')
 
 def user_login(request):
     context = {}
@@ -22,10 +17,22 @@ def user_login(request):
             password = cd.get("password", "")
             user = authenticate(username=username, password=password)
             if user:
-                user_active_action(request, user)
+                if user.is_active:                        
+                    login(request, user)   # 集成当前用户到session中                     
+                    return HttpResponse('Authenticated successfully')
+                else:                        
+                    return HttpResponse('Disabled account')
             else:
                 return HttpResponse("Invalid Login")
     else:
         form = LoginForm()
-    context['form'] = form
+    context['form'] = form # form.errors
     return render(request, "account/login.html", context)
+
+# login logout login and logout
+
+@login_required
+def dashboard(request):
+    context = {}
+    """在用户登入后"""
+    return render(request, "account/dashboard.html", context)

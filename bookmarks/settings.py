@@ -146,3 +146,10 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/media/'
 # --------------- media setting-----------------------
+
+
+# ---------------LOGIN setting -----------------------
+LOGIN_REDIRECT_URL = '/account/'
+LOGIN_URL = '/account/login/'
+LOGOUT_URL = '/account/logout/'
+# ---------------LOGIN setting -----------------------

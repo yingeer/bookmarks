@@ -6,6 +6,7 @@ from . import views as account_views
 
 
 app_name = "account"
+
 urlpatterns = [
-    re_path("^login/$", account_views.user_login, name="user_login"),
+    re_path(r"^$", account_views.dashboard, name="dashboard"),
 ]
