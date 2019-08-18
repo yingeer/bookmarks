@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.conf import settings
 from django.shortcuts import render, redirect
-
+from . import views
 
 urlpatterns = [
     path('yingadmin/', admin.site.urls),
+    re_path("^$", views.home, name="home"),
     re_path("^account/", include("account.urls", namespace="account")),
     re_path('^account/', include('django.contrib.auth.urls')),
 ]

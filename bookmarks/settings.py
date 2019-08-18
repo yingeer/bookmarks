@@ -46,11 +46,11 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # Session：通过请求管理session, 我的理解：在request上加上session
+    # Session：通过request管理session, 我的理解：在request.session
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    # 将session与用户关联
+    # 将user绑定到request上 request.user
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -153,3 +153,14 @@ LOGIN_REDIRECT_URL = '/account/'
 LOGIN_URL = '/account/login/'
 LOGOUT_URL = '/account/logout/'
 # ---------------LOGIN setting -----------------------
+
+# --------------- mail setting -----------------------
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = "smtp.qq.com"
+EMAIL_HOST_USER = "2822339490@qq.com"
+EMAIL_HOST_PASSWORD = 'akoqwuytrqfadech'
+EMAIL_PORT = 25 #发送服务器端口
+EMAIL_USE_TLS = True
+EMAIL_TIMEOUT = 20
+DEFAULT_FROM_EMAIL = "2822339490@qq.com"
+# --------------- mail setting -----------------------

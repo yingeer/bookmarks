@@ -9,4 +9,5 @@ app_name = "account"
 
 urlpatterns = [
     re_path(r"^$", account_views.dashboard, name="dashboard"),
+
 ]

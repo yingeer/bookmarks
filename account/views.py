@@ -34,5 +34,6 @@ def user_login(request):
 @login_required
 def dashboard(request):
     context = {}
+    context['section'] = "dashboard"
     """在用户登入后"""
     return render(request, "account/dashboard.html", context)
