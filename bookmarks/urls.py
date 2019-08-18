@@ -21,6 +21,7 @@ from django.shortcuts import render, redirect
 
 urlpatterns = [
     path('yingadmin/', admin.site.urls),
+    re_path("^account/", include("account.urls", namespace="account")),
 ]
 
 
