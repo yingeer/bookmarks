@@ -54,9 +54,10 @@ def user_register(request):
                 new_user.first_name = ""
                 new_user.last_name = cd['username']
             new_user.save()
-            
+
     elif request.method == "GET":
         form = RegisterForm()
     context['form'] = form
 
-    return render(request, "account/register.html", context)
+    return render(request, "registration/register.html", context)
+
