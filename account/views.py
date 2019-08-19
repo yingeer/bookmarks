@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import permission_required
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -40,4 +40,23 @@ def dashboard(request):
 
 
 def user_register(request):
-    pass
+    context = {}
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            new_user = form.save(commit=False)
+            new_user.set_password(cd['password2'])
+            if cd['first_name']:
+                last_name = cd['username'] - cd['first_name']
+                new_user.last_name = last_name
+            else:
+                new_user.first_name = ""
+                new_user.last_name = cd['username']
+            new_user.save()
+            
+    elif request.method == "GET":
+        form = RegisterForm()
+    context['form'] = form
+
+    return render(request, "account/register.html", context)

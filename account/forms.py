@@ -16,7 +16,7 @@ class RegisterForm(forms.ModelForm):
                                 min_length=6, 
                                 max_length=20,
                                 widget=forms.PasswordInput)
-    first_name = forms.CharField(label="first name")
+    first_name = forms.CharField(label="first name", required=False)
     class Meta:
         model = User
         fields = ("username", "email")
