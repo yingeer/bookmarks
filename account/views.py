@@ -31,7 +31,7 @@ def user_login(request):
 
 # login logout login and logout
 
-@login_required
+@login_required  
 def dashboard(request):
     context = {}
     context['section'] = "dashboard"
