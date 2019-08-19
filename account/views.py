@@ -37,3 +37,7 @@ def dashboard(request):
     context['section'] = "dashboard"
     """在用户登入后"""
     return render(request, "account/dashboard.html", context)
+
+
+def user_register(request):
+    pass
