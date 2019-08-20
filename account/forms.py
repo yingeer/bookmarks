@@ -51,4 +51,3 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ("profile_photo", "date_of_birth")
-# 为什么要写成两个模型

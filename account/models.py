@@ -15,4 +15,4 @@ class Profile(models.Model):
     # 在模板中，通过 {{ profile1.profile_photo.url }}
     def __str__(self):
         return 'Profile for user {}'.format(self.user.username)
-
+    

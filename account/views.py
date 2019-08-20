@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import Profile
+from django.contrib import messages
 # Create your views here.
 
 
@@ -63,6 +64,7 @@ def user_register(request):
 
     return render(request, "registration/register.html", context)
 
+
 @login_required
 def edit_profile(request):
     context = {}
@@ -75,6 +77,9 @@ def edit_profile(request):
         if user_edit_form.is_valid() and profile_form.is_valid():
             user_edit_form.save()
             profile_form.save()
+            messages.success(request, "Profile updated successfully")
+        else: # 用messages返回消息
+            messages.error(request, 'Error updating your profile')
     elif request.method == "GET":
         user_edit_form = UserEditForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
