@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Profile
+from .models import Profile
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=20)
@@ -36,3 +38,17 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationErron("username有无效字符")
         else:
             return cd['username']
+
+# 把Profile 模型拆分成 User Profile
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "email")
+        
+# 可以不用在Profile中加上user，因为user是一个外键， 当然，也可以不用在写UserEditFrom,直接在视图函数里
+# profile_form = ProfileForm(data=request.POST, files=request.FILES) 
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ("profile_photo", "date_of_birth")
+# 为什么要写成两个模型

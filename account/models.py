@@ -9,7 +9,7 @@ from django.conf import settings
 # 还想像用户展现他们的 信息（profile）, 让他们注册
 class Profile(models.Model):
     user = models.OneToOneField(to=settings.AUTH_USER_MODEL,on_delete=models.DO_NOTHING)
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(blank=True, null=True)
     date_of_register = models.DateTimeField(auto_now_add=True)
     profile_photo = models.ImageField(upload_to=r'users/%Y/%m/%d', blank=True)
     # 在模板中，通过 {{ profile1.profile_photo.url }}
