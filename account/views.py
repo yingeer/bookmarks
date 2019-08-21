@@ -24,7 +24,7 @@ def user_login(request):
                     return HttpResponse('Authenticated successfully')
                 else:                        
                     return HttpResponse('Disabled account')
-            else:
+            else:  # 情况的数量
                 return HttpResponse("Invalid Login")
     else:
         form = LoginForm()
