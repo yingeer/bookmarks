@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'account',
     'debug_toolbar',
     "mdeditor",
+    "imageapp",
 ]
 
 MIDDLEWARE = [
