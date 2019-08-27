@@ -1,5 +1,8 @@
 from django import forms
 from .models import Image
+from django.utils.text import slugify
+from urllib import request
+from django.core.files.base import ContentFile
 
 
 class ImageForm(forms.ModelForm):
@@ -24,4 +27,16 @@ class ImageForm(forms.ModelForm):
         
         return url
             
-        
+    def save(self, commit=True):
+        """把写在视图函数里的方法写在forms里面，避免复用"""
+        # image已经是一个对象了
+        image_obj = super().save(commit=False)
+        image_url = self.cleaned_data['url']
+        image_name = "{}.{}".format(slugify(image_obj.title), image_url.split(".")[-1])
+        response = request.urlopne(image_url)
+        # 下面的关于image存储 ????
+        image_obj.image.save(image_name, ContentFile(response.read()))
+        if commit:
+            image_obj.save()
+        else: 
+            return image_obj
