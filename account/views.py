@@ -73,6 +73,7 @@ def edit_profile(request):
         profile_form = ProfileForm(data=request.POST, 
                                     instance=request.user.profile,
                                     files=request.FILES)
+
         profile = ProfileForm()
         if user_edit_form.is_valid() and profile_form.is_valid():
             user_edit_form.save()
